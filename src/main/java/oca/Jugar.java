@@ -15,7 +15,7 @@ public class Jugar {
         //inicializa el tablero
         Tablero tablero = new Tablero();
 
-        //inicializa numero de jugadores
+        //inicializa numero de jugadores        
         numPlayer = 4;
 
         //inicializa jugadores[]
@@ -24,6 +24,14 @@ public class Jugar {
         //loop de juego
         while (!ganador) {
             for (int i = 0; i < numPlayer; i++) {
+                //Actualiza el estado del jugador[i] antes de turno
+                //Redibuja la ventana con los datos de i
+                //Dados
+                //Comprueba si pasa por POZO (31), si lo hace, comprueba si habia alguien y actualiza su estado
+                //Actualiza el estado del jugador tras el turno (con bucle por si debe volver a tirar)
+                //Redibuja la ventana tras la tirada
+                
+                //Si hay ganador, para, sino, pasa a i+1
                 if (ganador) {
                     break;
                 }
