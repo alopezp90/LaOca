@@ -8,6 +8,7 @@ public class Jugador {
 
     private String nombre;
     private int posicion, penalizacion;
+    private boolean ganador;
 
     public Jugador() {
         this.nombre = "";
@@ -35,6 +36,14 @@ public class Jugador {
 
     public void setPenalizacion(int penalizacion) {
         this.penalizacion = penalizacion;
+    }
+
+    public boolean isGanador() {
+        return ganador;
+    }
+
+    public void setGanador(boolean ganador) {
+        this.ganador = ganador;
     }
 
     //Métodos
