@@ -30,6 +30,18 @@ public class Casilla {
                 this.turnosPenalizacion = 0;
                 this.tiradaExtra = true;
                 break;
+                
+            case "puente1":
+                this.movimientoOrden = 13;
+                this.turnosPenalizacion = 1;
+                this.tiradaExtra = false;
+                break;
+             
+            case "puente2":
+                this.movimientoOrden = 7;
+                this.turnosPenalizacion = 1;
+                this.tiradaExtra = false;
+                break;
             
             case "pozo":
                 this.movimientoOrden = 0;

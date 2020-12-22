@@ -10,9 +10,12 @@ public class Tablero {
 
     public Tablero() {
 
-        this.casilla = new Casilla[63];
+        this.casilla = new Casilla[64];
+        
+        casilla[0] = new Casilla("salida");
+        //Se inicializara como: movimientoOrden = 0, turnosPenalizacion = 0, tiradaExtra = false
 
-        for (int i = 0; i < 63; i++) {
+        for (int i = 0; i < 64; i++) {
             switch (i) {
                 case 5:
                 case 14:
@@ -30,6 +33,12 @@ public class Tablero {
                 case 45:
                 case 54:
                     casilla[i] = new Casilla("oca2");
+                    break;
+                case 6:
+                    casilla[i] = new Casilla("puente1");
+                    break;
+                case 12:
+                    casilla[i] = new Casilla("puente2");
                     break;
                 case 26:
                     casilla[i] = new Casilla("dados1");
