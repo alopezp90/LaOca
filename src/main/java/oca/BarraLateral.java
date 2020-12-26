@@ -9,12 +9,12 @@ import javax.swing.*;
 
 public class BarraLateral extends JPanel {
     
-    private final int ANCHO_BARRA = 434;
-    private final int ALTO_BARRA = 768;
-    private final int ANCHO_BOTON = 100;
-    private final int ALTO_BOTON = 100;
-    private final int ANCHO_SCROLL = 366;
-    private final int ALTO_SCROLL = 566;
+    private final int ANCHO_BARRA = 440;
+    private final int ALTO_BARRA = 740;
+    private final int ANCHO_BOTON = 80;
+    private final int ALTO_BOTON = 80;
+    private final int ANCHO_SCROLL = 400;
+    private final int ALTO_SCROLL = 600;
     
     private JScrollPane historialScroll;
     private JButton boton;
@@ -31,11 +31,11 @@ public class BarraLateral extends JPanel {
         boton = new JButton("Tirar");
         boton.setSize(ANCHO_BOTON, ALTO_BOTON);
         
-        this.add(Box.createRigidArea(new Dimension(0, 34)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(this.historialScroll);
-        this.add(Box.createRigidArea(new Dimension(0, 34)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(boton);
-        this.add(Box.createRigidArea(new Dimension(0, 34)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
     }
     
     private JScrollPane inicializarHistorial(){
