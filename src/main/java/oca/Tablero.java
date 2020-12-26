@@ -13,7 +13,6 @@ public class Tablero {
         this.casilla = new Casilla[64];
         
         casilla[0] = new Casilla("salida");
-        //Se inicializara como: movimientoOrden = 0, turnosPenalizacion = 0, tiradaExtra = false
 
         for (int i = 0; i < 64; i++) {
             switch (i) {
@@ -61,6 +60,15 @@ public class Tablero {
                 default:
                     casilla[i] = new Casilla();
                     break;
+            }
+            if (i != 0){
+                casilla[i].setPosicionY(50 + (int) (i/9) * 100);
+
+                if (i/9 % 2 == 0){
+                    casilla[i].setPosicionX(50 + 100 * (i - (9 * (int) (i/9))));
+                } else {
+                    casilla[i].setPosicionX(850 - 100 * (i - (9 * (int) (i/9))));
+                }
             }
         }
     }
