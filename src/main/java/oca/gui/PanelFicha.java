@@ -4,6 +4,7 @@ package oca.gui;
  * @author Alberto López Puertas
  * <alopezp90@gmail.com>
  */
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -38,7 +39,14 @@ public class PanelFicha extends JPanel {
                 this.ficha.setIcon(F_VERDE);
                 break;
         }
-        this.setBounds(0, -5, ANCHO_FICHA, ALTO_FICHA - 5);
+        //Define las variables del JPanel
+        //No se por que hay que subirlo y ampliar altura 5px (todos los paneles)
+        this.setBounds(0, -5, ANCHO_FICHA, ALTO_FICHA + 5);
+        this.setOpaque(false);
+        this.setLayout(new FlowLayout());
+        
+        //Añade la ficha al JPanel
+        this.add(ficha);
     }
 
     //Coloca PanelFicha en la posicion indicada

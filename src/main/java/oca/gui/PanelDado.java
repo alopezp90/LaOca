@@ -24,10 +24,31 @@ public class PanelDado extends JPanel {
     //Instancia variables
     private JButton botonDado = new JButton();
 
-    //Constructor de la clase. Parámetro 0-3 para colores de jugador, otro para blanco.
-    public PanelDado(int icono) {
+    //Constructor por defecto de la clase
+    public PanelDado() {
         //Define las variables de botonDado
-        switch (icono) {
+        this.botonDado.setIcon(D_BLANCO);
+        this.botonDado.setBorder(BorderFactory.createEmptyBorder());
+        this.botonDado.setContentAreaFilled(false);
+        this.botonDado.setFocusable(false);
+
+        //Define las variables de panelDado
+        //No se por que hay que subirlo y ampliar altura 5px (todos los paneles)
+        this.setBounds(POSICION_X, POSICION_Y - 5, ANCHO_BOTON, ALTO_BOTON + 5);
+        this.setOpaque(false);
+        this.setLayout(new FlowLayout());
+        
+        //Añade el boton al JPanel
+        this.add(botonDado);
+    }
+    
+    //Metodo getter
+    public JButton getBotonDado() {
+        return botonDado;
+    }
+    
+    public void cambiaColor(int jugador) {
+        switch (jugador) {
             case 0:
                 this.botonDado.setIcon(D_AZUL);
                 break;
@@ -43,14 +64,5 @@ public class PanelDado extends JPanel {
             default:
                 this.botonDado.setIcon(D_BLANCO);
         }
-        this.botonDado.setBorder(BorderFactory.createEmptyBorder());
-        this.botonDado.setContentAreaFilled(false);
-        this.botonDado.setFocusable(false);
-        
-        //Define las variables de panelDado
-        //No se por que hay que subirlo y ampliar altura 5px (todos los paneles)
-        this.setBounds(POSICION_X, POSICION_Y - 5, ANCHO_BOTON, ALTO_BOTON + 5);   
-        this.setOpaque(false);
-        this.setLayout(new FlowLayout());
     }
 }
