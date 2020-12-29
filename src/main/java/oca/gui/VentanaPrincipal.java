@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import java.util.Random;
 
@@ -94,10 +93,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
     
     public static void main(String[] args) {
         VentanaPrincipal frame = new VentanaPrincipal();
-        frame.getPanelLog().getLogPane().setText("es una prueba");
-        frame.getPanelLog().getLogPane().setText(
-                frame.getPanelLog().getLogPane().getText()
-                + "<br/>" + "nueva linea");
         frame.pack();
         frame.setVisible(true);
     }
