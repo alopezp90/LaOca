@@ -200,28 +200,13 @@ public class Jugador {
         
         texto = texto + "Ha llegado a la casilla " + tablero.getCasilla(this.posicion).getNombre()
                 + " número " + this.posicion + ".";
-//        if (tablero.getCasilla(this.posicion).getMovimientoOrden() > 0) {
-//            texto = texto + " Debe avanzar " + tablero.getCasilla(this.posicion).getMovimientoOrden() + " casillas";
-//            if (tablero.getCasilla(this.posicion).isTiradaExtra()) {
-//                this.turno++;
-//                texto = texto + " y volver a tirar.<br/>";
-//            } else if (tablero.getCasilla(this.posicion).getTurnosPenalizacion() > 0) {
-//                this.penalizacion += tablero.getCasilla(this.posicion).getTurnosPenalizacion();
-//                texto = texto + " y esperar " + this.penalizacion + " turnos.<br/>";
-//            } else if (tablero.getCasilla(this.posicion).getTurnosPenalizacion() < 0) {
-//                this.penalizacion = tablero.getCasilla(this.posicion).getTurnosPenalizacion();
-//                texto = texto + " y esperar un rescate.<br/>";
-//            } else {
-//                texto = texto + ".<br/>";
-//            }
-//            texto = texto + mover(tablero, jugadores, tablero.getCasilla(this.posicion).getMovimientoOrden());
-//        }
+
         return texto;
     }
     
     /**
-     * Metodo que comprueba si el jugador ha caido en una casilla con orden de 
-     * movimiento, de ser asi actualiza su posicion y estado.
+     * Metodo que comprueba el tipo de casilla en la que ha caido el Jugador,
+     * actualiza su posicion y estado.
      * 
      * @param tablero array con la informacion de las casillas
      * @param jugadores array con la informacion de los jugadores
@@ -234,15 +219,19 @@ public class Jugador {
             switch (tablero.getCasilla(this.posicion).getNombre()){
                 case "oca":
                     texto = texto + "<em>¡De oca en oca y tiro por que me toca!</em>";
-                    this.turno++;       //Asigna otro turno
+                    if (tablero.getCasilla(this.posicion).isTiradaExtra()){
+                        this.turno++;
+                    }
                     break;
                 case "puente":
-                    texto = texto + "Avanza hasta la posada, pero pierde un turno.";
-                    this.penalizacion++;//Asigna turno de penalizacion
+                    texto = texto + "Avanza hasta la posada pero pierde turno.";
+                    this.penalizacion += tablero.getCasilla(this.posicion).getTurnosPenalizacion();
                     break;
                 case "dados":
-                    texto = texto + "Avanza " + tablero.getCasilla(this.posicion).getMovimientoOrden() + " y tira otra vez.";
-                    this.turno++;       //Asigna otro turno
+                    texto = texto + "<em>¡De dado a dado y tiro por que me ha tocado!</em>";
+                    if (tablero.getCasilla(this.posicion).isTiradaExtra()){
+                        this.turno++;
+                    }
                     break;
             }
             this.mover(tablero.getCasilla(this.posicion).getMovimientoOrden());
@@ -259,12 +248,21 @@ public class Jugador {
             this.mover(tablero.getCasilla(this.posicion).getMovimientoOrden());
             
         } else {
-            switch (tablero.getCasilla(this.posicion).getTurnosPenalizacion()) {
-                
+            switch (tablero.getCasilla(this.posicion).getNombre()) {
+                case "normal":
+                    texto = texto + "Fin del turno.";
+                    break;
+                case "posada":
+                    texto = texto + "Debe esperar un turno aquí.";
+                    break;
+                case "carcel":
+                    texto = texto + "Debe esperar dos turnos aquí.";
+                    break;
+                case "pozo":
+                    texto = texto + "Debe esperar un rescate.";
+                    break;
             }
         }
-        
-        
         return texto;
     }
     

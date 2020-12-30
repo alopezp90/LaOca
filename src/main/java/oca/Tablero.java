@@ -66,6 +66,9 @@ public class Tablero {
                 case 58:
                     casilla[i] = new Casilla("calavera");
                     break;
+                case 63:
+                    casilla[i] = new Casilla("final");
+                    break;
                 default:
                     casilla[i] = new Casilla();
                     break;
@@ -87,13 +90,17 @@ public class Tablero {
             casilla[i].setPosicion(i);
             casilla[i].setPoint(new Point(x, y));
             
-            //Da movimientoOrden a las casillas oca y puente
-            if (casilla[i].getNombre().equals("oca")) {
-                casilla[i].setMovimientoOrden(nextOca(i));
-            } else if (casilla[i].getNombre().equals("posada")) {
-                casilla[i].setMovimientoOrden(nextPosada(i));
-            } else if (casilla[i].getNombre().equals("dados")) {
-                casilla[i].setMovimientoOrden(i);
+            //Da movimientoOrden a las casillas oca, puente y dados
+            switch (casilla[i].getNombre()) {
+                case "oca":
+                    casilla[i].setMovimientoOrden(nextOca(i));
+                    break;
+                case "posada":
+                    casilla[i].setMovimientoOrden(nextPosada(i));
+                    break;
+                case "dados":
+                    casilla[i].setMovimientoOrden(nextDados(i));
+                    break;
             }
         }
     }
@@ -128,5 +135,41 @@ public class Tablero {
         } while (!casilla[i].getNombre().equals("posada"));
         
         return contador;
+    }
+    
+    /**
+     * Metodo que cuenta el numero de casillas hasta casilla dados.
+     * @param i elemento de tablero desde el que empieza a contar.
+     * @return n numero de casillas hasta la casilla dados.
+     */
+    public int nextDados(int i) {
+        int contador = 0;
+        boolean found = false;  //true cuando se ha encontrado el siguiente dado
+
+        //Busca siguiente casilla dados
+        do {
+            contador++;
+            if (casilla[i + contador].getNombre().equals("dados")){
+                found = true;
+            }               
+        } while (!found && (i + contador) < 63);
+        
+        //Si la encuentra devuelve el contador
+        if (found) {
+            return contador;
+            
+        //Si no la encuentra, busca la primera del tablero
+        } else {
+            contador = 0;
+            do {
+                contador++;
+                if (casilla[contador].getNombre().equals("dados")){
+                    
+                    //Si la encuentra devuelve la distancia a retroceder
+                    return contador - i;
+                }    
+            } while (contador < 63);
+        }
+        return 0;   //nunca deberia ejecutar est linea
     }
 }

@@ -32,7 +32,7 @@ public class Casilla {
      * </ul>
      */
     public Casilla() {
-        this.nombre = "";
+        this.nombre = "normal";
     }
 
     /**
