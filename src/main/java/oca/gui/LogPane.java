@@ -7,18 +7,21 @@ package oca.gui;
 import javax.swing.JTextPane;
 
 public class LogPane extends JTextPane {
+    
+    //Instancia variable
+    private String texto = "";
 
     //Constructor por defecto de LogPane
     public LogPane() {
         //Define variables de LogPane
         this.setEditable(false);
         this.setContentType("text/html");
-        this.setText("");
+        this.setText(texto);
     }
 
     //Metodo para añadir nueva linea al texto
     public void nuevaLinea(String linea) {
-        String ending = this.getText().substring(this.getText().length() - 1 - 18);
-        this.setText(this.getText().substring(0, this.getText().length() - 1 - 18) + "<br/>" + linea + ending);
+        this.texto = this.texto + "<br/>" + linea;
+        this.setText(this.texto);
     }
 }
