@@ -72,7 +72,7 @@ public class Tablero {
             }
         }
         
-        //Recorre el array dando valor a posicion y point de cada casilla
+        //Recorre el array dando valor a movimientoOrden, posicion y point de cada casilla
         for (int i = 1; i < 64; i++) {
             //Calcula x e y temporales
             int x;
@@ -85,7 +85,16 @@ public class Tablero {
             
             //Da los valores buscados a casilla
             casilla[i].setPosicion(i);
-            casilla[i].setPoint(new Point(x, y));   
+            casilla[i].setPoint(new Point(x, y));
+            
+            //Da movimientoOrden a las casillas oca y puente
+            if (casilla[i].getNombre().equals("oca")) {
+                casilla[i].setMovimientoOrden(nextOca(i));
+            } else if (casilla[i].getNombre().equals("posada")) {
+                casilla[i].setMovimientoOrden(nextPosada(i));
+            } else if (casilla[i].getNombre().equals("dados")) {
+                casilla[i].setMovimientoOrden(i);
+            }
         }
     }
 
@@ -99,6 +108,25 @@ public class Tablero {
      * @return n numero de casillas hasta la siguiente oca.
      */
     public int nextOca(int i) {
-        return 0;
+        int contador = 0;
+        do{
+            contador++;
+        } while (i < 63 || !casilla[i].getNombre().equals("oca"));
+        
+        return contador;
+    }
+    
+    /**
+     * Metodo que cuenta el numero de casillas hasta la siguiente posada.
+     * @param i elemento de tablero desde el que empieza a contar.
+     * @return n numero de casillas hasta la siguiente posada.
+     */
+    public int nextPosada(int i) {
+        int contador = 0;
+        do{
+            contador++;
+        } while (!casilla[i].getNombre().equals("posada"));
+        
+        return contador;
     }
 }

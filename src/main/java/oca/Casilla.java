@@ -1,13 +1,12 @@
 package oca;
 
 /**
- * Esta clase define los tipos de casilla posibles en La Oca. 
- * Cada tipo de casilla queda definido únicamente mediante su nombre.
+ * Esta clase define los tipos de casilla posibles en La Oca. Cada tipo de
+ * casilla queda definido únicamente mediante su nombre.
  *
  * @author Alberto López Puertas
  * <https://github.com/alopezp90>
  */
-
 import java.awt.Point;
 
 public class Casilla {
@@ -41,23 +40,15 @@ public class Casilla {
      *
      * @param nombre Tipo de casilla, puede ser:
      * <ul>
-     * <li>"oca1" son casillas de tipo oca que tienen a la siguiente del mismo
-     * tipo a 4 de distancia, da tirada extra.</li>
-     * <li>"oca2" son casillas de tipo oca que tienen a la siguiente del mismo
-     * tipo a 5 de distancia, da tirada extra.</li>
-     * <li>"puente1" es la primera casilla de tipo puente que avanza hasta la
-     * posada, pierde 1 turno.</li>
-     * <li>"puente2" es la segunda casilla de tipo puente que avanza hasta la
-     * posada, pierde 1 turno.</li>
-     * <li>"posada" pierde 1 turno.</li>
+     * <li>"oca" ordenan movimiento hasta la siguiente del mismo tipo y dan
+     * tirada extra.</li>
+     * <li>"puente" ordena avanzar hasta la posada, pierdes 1 turno.</li>
+     * <li>"posada" pierdes 1 turno.</li>
      * <li>"pozo" asigna -1 turnos de penalizacion, solo se resuelve si otro
      * jugador cruza la casilla.</li>
      * <li>"laberinto" hace retroceder 12 casillas</li>
-     * <li>"carcel" pierde 2 turnos.</li>
-     * <li>"dados1" avanza el numero de casillas en el que se encuentra el
-     * dado.</li>
-     * <li>"dados2" avanza el numero de casillas en el que se encuentra el
-     * dado.</li>
+     * <li>"carcel" pierdes 2 turnos.</li>
+     * <li>"dados" avanza tantas casillas como la posicion del dado.</li>
      * <li>"calavera" retrocede hasta la casilla 1.</li>
      * </ul>
      */
@@ -65,70 +56,30 @@ public class Casilla {
         this.nombre = nombre;
 
         switch (nombre) {
-            case "oca1":
-                this.movimientoOrden = 4;
+            case "oca":
                 this.turnosPenalizacion = 0;
                 this.tiradaExtra = true;
                 break;
-
-            case "oca2":
-                this.movimientoOrden = 5;
-                this.turnosPenalizacion = 0;
-                this.tiradaExtra = true;
-                break;
-
-            case "puente1":
-                this.movimientoOrden = 13;
+            case "puente":
                 this.turnosPenalizacion = 1;
-                this.tiradaExtra = false;
                 break;
-
-            case "puente2":
-                this.movimientoOrden = 7;
-                this.turnosPenalizacion = 1;
-                this.tiradaExtra = false;
-                break;
-
             case "posada":
-                this.movimientoOrden = 0;
                 this.turnosPenalizacion = 1;
-                this.tiradaExtra = false;
                 break;
-
             case "pozo":
-                this.movimientoOrden = 0;
                 this.turnosPenalizacion = -1;
-                this.tiradaExtra = false;
                 break;
-
             case "laberinto":
                 this.movimientoOrden = -12;
-                this.turnosPenalizacion = 0;
-                this.tiradaExtra = false;
                 break;
-
             case "carcel":
-                this.movimientoOrden = 0;
                 this.turnosPenalizacion = 2;
-                this.tiradaExtra = false;
                 break;
-
-            case "dados1":
-                this.movimientoOrden = 26;
-                this.turnosPenalizacion = 0;
+            case "dados":
                 this.tiradaExtra = true;
                 break;
-
-            case "dados2":
-                this.movimientoOrden = 56;
-                this.turnosPenalizacion = 0;
-                this.tiradaExtra = true;
-                break;
-
             case "calavera":
                 this.movimientoOrden = -57;
-                this.turnosPenalizacion = 0;
-                this.tiradaExtra = false;
                 break;
         }
     }
@@ -145,7 +96,7 @@ public class Casilla {
     public void setPoint(Point point) {
         this.point = point;
     }
-    
+
     //Metodos getter
     public String getNombre() {
         return nombre;
