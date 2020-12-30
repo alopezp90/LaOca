@@ -16,7 +16,7 @@ public class Jugador {
     private int posicion;       //Posicion del tablero que ocupa el jugador (comienza a 0)
     private int penalizacion;   //Turnos de penalizacion que tiene el jugador
     private int turno;          //Cuantas tiradas le quedan al jugador
-    private int tirada;         //Ultimo lanzamiento de dado del jugador
+    private int movimiento;     //Ultimo movimiento del jugador
 
     /**
      * Constructor por defecto de Jugador. Inicializa los parametros como:
@@ -81,12 +81,12 @@ public class Jugador {
         this.turno = turno;
     }
 
-    public int getTirada() {
-        return tirada;
+    public int getMovimiento() {
+        return movimiento;
     }
 
-    public void setTirada(int tirada) {
-        this.tirada = tirada;
+    public void setMovimiento(int movimiento) {
+        this.movimiento = movimiento;
     }
 
     /**
@@ -105,9 +105,9 @@ public class Jugador {
     public int tiraDado() {
         this.turno--;
         Random rd = new Random();
-        this.tirada = rd.nextInt(6) + 1;
+        this.movimiento = rd.nextInt(6) + 1;
         
-        return this.tirada;
+        return this.movimiento;
     }
 
     /**
@@ -116,8 +116,8 @@ public class Jugador {
      *
      * @return true si ha ganado la partida
      */
-    public boolean esGanador() {
-        return this.tirada == 0 && this.posicion == 63;
+    public boolean isGanador() {
+        return this.turno == 0 && this.posicion == 63;
     }
     
     /**
@@ -192,7 +192,7 @@ public class Jugador {
         
         int inicio = this.posicion; //Posicion antes de empezar el movimiento
         
-        this.mover(this.tirada);
+        this.mover(this.movimiento);
         
         if (hayRescate(inicio, jugadores)) {
             texto = texto + "<strong>¡Ha rescatado a los jugadores atrapados en el pozo!</strong><br/>";
@@ -207,7 +207,7 @@ public class Jugador {
     /**
      * Metodo que comprueba el tipo de casilla en la que ha caido el Jugador,
      * actualiza su posicion y estado.
-     * 
+     * pues ya tengo 
      * @param tablero array con la informacion de las casillas
      * @param jugadores array con la informacion de los jugadores
      * @return String con nueva posicion y estado
@@ -234,7 +234,8 @@ public class Jugador {
                     }
                     break;
             }
-            this.mover(tablero.getCasilla(this.posicion).getMovimientoOrden());
+            this.movimiento = tablero.getCasilla(this.posicion).getMovimientoOrden();
+            this.mover(this.movimiento);
             
         } else if (tablero.getCasilla(this.posicion).getMovimientoOrden() < 0) {
             switch (tablero.getCasilla(this.posicion).getNombre()) {
@@ -245,7 +246,8 @@ public class Jugador {
                     texto = texto + "¡Tiene que retroceder hasta la primera casilla!";
                     break;
             }
-            this.mover(tablero.getCasilla(this.posicion).getMovimientoOrden());
+            this.movimiento = tablero.getCasilla(this.posicion).getMovimientoOrden();
+            this.mover(this.movimiento);
             
         } else {
             switch (tablero.getCasilla(this.posicion).getNombre()) {
@@ -262,6 +264,7 @@ public class Jugador {
                     texto = texto + "Debe esperar un rescate.";
                     break;
             }
+            this.movimiento = 0;
         }
         return texto;
     }
