@@ -1,7 +1,7 @@
 package oca;
 
 /**
- * Una clase para definir el array de casillas que forma el tablero de La Oca.
+ * Esta clase define el array de casillas que forma el tablero de La Oca.
  * Construye un array de 64 casillas con la disposicion de La Oca.
  *
  * @author Alberto López Puertas
