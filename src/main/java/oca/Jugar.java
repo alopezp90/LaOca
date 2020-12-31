@@ -1,47 +1,90 @@
 package oca;
 
 /**
+ * Esta clase inicializa a los jugadores, el tablero y la GUI.
+ *
  * @author Alberto López Puertas
- * <alopezp90@gmail.com>
+ * <https://github.com/alopezp90>
  */
-import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import oca.gui.VentanaPrincipal;
 
 public class Jugar {
 
-    private static int numPlayer;
-    private static boolean ganador = false;
+    //Declaracion de constantes
+    private static ImageIcon ICONO = new ImageIcon("src/main/resources/Oca96.png");
+
+    //Inicializa variables
+    private static Tablero tablero = new Tablero();
+
+    //Instacia variables
+    private static int numJugador;
+    private static Jugador[] jugador;
+    private static VentanaPrincipal ventanaPrincipal;
 
     public static void main(String[] args) {
-        //inicializa el tablero
-        Tablero tablero = new Tablero();
 
-        //inicializa numero de jugadores        
-        numPlayer = 4;
+        solicitaJugadores();
+        jugador = new Jugador[numJugador];
 
-        //inicializa jugadores[]
-        //Jugador[] player = new Jugador[numPlayer];
-
-        //loop de juego
-        while (!ganador) {
-            for (int i = 0; i < numPlayer; i++) {
-                //Actualiza el estado del jugador[i] antes de turno
-                //Redibuja la ventana con los datos de i
-                //Dados
-                //Comprueba si pasa por POZO (31), si lo hace, comprueba si habia alguien y actualiza su estado
-                //Actualiza el estado del jugador tras el turno (con bucle por si debe volver a tirar)
-                //Redibuja la ventana tras la tirada
-                
-                //Si hay ganador, para, sino, pasa a i+1
-                if (ganador) {
-                    break;
-                }
-            }
+        for (int i = 0; i < jugador.length; i++) {
+            jugador[i] = new Jugador(solicitaNombre(i));
+            System.out.println(jugador[i].getNombre());
         }
-
+        
+        ventanaPrincipal = new VentanaPrincipal();
+        ventanaPrincipal.pack();
+        ventanaPrincipal.setVisible(true);
     }
 
-    public static int tiraDado() {
-        Random rd = new Random();
-        return rd.nextInt(6) + 1;
+    /**
+     * Metodo que solicita numero de jugadores mediante botones y lo guarda en
+     * numJugadores.
+     */
+    public static void solicitaJugadores() {
+        do {
+            int opcion = JOptionPane.showOptionDialog(
+                    null,
+                    "¿Cuántos jugadores sois?",
+                    "Número de jugadores",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    ICONO,
+                    new Object[]{"2", "3", "4"}, null);
+            switch (opcion) {
+                case 0:
+                    numJugador = 2;
+                    break;
+                case 1:
+                    numJugador = 3;
+                    break;
+                case 2:
+                    numJugador = 4;
+                    break;
+            }
+        } while (numJugador != 2 && numJugador != 3 && numJugador != 4);
+    }
+    
+    /**
+     * Metodo que solicita el nombre de los jugadores.
+     * 
+     * @return String con nombre del jugador.
+     */
+    public static String solicitaNombre(int i) {
+        String texto = null;
+        do {
+            Object objeto = JOptionPane.showInputDialog(null,
+                    "Introduce el nombre del jugador " + (i + 1),
+                    "Jugador " + (i + 1),
+                    JOptionPane.OK_OPTION,
+                    ICONO,
+                    null,
+                    null);
+            if (objeto != null) {
+                texto = objeto.toString();
+            }
+        } while (texto == null);
+        return texto;
     }
 }
