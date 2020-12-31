@@ -5,6 +5,7 @@ package oca.gui;
  * <alopezp90@gmail.com>
  */
 import java.awt.FlowLayout;
+import java.awt.Point;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -20,7 +21,6 @@ public class PanelFicha extends JPanel {
 
     //Instancia variables
     private JLabel ficha = new JLabel();
-    private int posicionX, posicionY;
 
     //Constructor de la clase. Parámetro 0-3 para colores de jugador
     public PanelFicha(int icono) {
@@ -47,10 +47,27 @@ public class PanelFicha extends JPanel {
         
         //Añade la ficha al JPanel
         this.add(ficha);
+        
+        //Inicializa la ficha no visible
+        this.setVisible(false);
     }
 
     //Coloca PanelFicha en la posicion indicada
-    public void mover(int x, int y) {
-        this.setLocation(x, y - 5);
+    public void mover(int icono, Point point) {
+        this.setVisible(true);
+        switch(icono) {
+            case 0:
+                this.setLocation((int) point.getX() + 16, (int) point.getY() + 11);
+                break;
+            case 1:
+                this.setLocation((int) point.getX() + 52, (int) point.getY() + 52);
+                break;
+            case 2:
+                this.setLocation((int) point.getX() + 16, (int) point.getY() + 52);
+                break;
+            case 3:
+                this.setLocation((int) point.getX() + 52, (int) point.getY() + 11);
+                break;
+        }
     }
 }
