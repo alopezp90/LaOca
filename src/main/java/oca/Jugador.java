@@ -109,6 +109,15 @@ public class Jugador {
         
         return this.movimiento;
     }
+    
+    /**
+     * Metodo que devuelve la tirada de dados.
+     * 
+     * @return String tirada de dados.
+     */
+    public String textoTirada() {
+        return "Ha sacado un " + this.movimiento;
+    }
 
     /**
      * Metodo que comprueba si al jugador no le quedan tiradas y se encuentra en
@@ -142,7 +151,12 @@ public class Jugador {
                 texto = texto + "green";
                 break;
         }
-        texto = texto + "'>" + this.nombre + ":</font></strong>";
+        if (!this.nombre.equals("")) {
+            texto = texto + "'>" + this.nombre + ":</font></strong>";
+        } else {
+            texto = texto + "'>Jugador " + (this.numero + 1) + ":</font></strong>";
+        }
+        
         if (this.penalizacion == 0) {
             this.turno++;
         }
