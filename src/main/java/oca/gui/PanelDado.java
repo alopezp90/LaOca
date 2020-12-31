@@ -15,19 +15,18 @@ public class PanelDado extends JPanel {
     //Declara constantes
     private final int POSICION_X = 1095, POSICION_Y = 620;
     private final int ANCHO_BOTON = 90, ALTO_BOTON = 100;
-    private final ImageIcon D_BLANCO = new ImageIcon("src/main/resources/DadoBlanco100.png");
-    private final ImageIcon D_AZUL = new ImageIcon("src/main/resources/DadoAzul100.png");
-    private final ImageIcon D_NARANJA = new ImageIcon("src/main/resources/DadoNaranja100.png");
-    private final ImageIcon D_ROJO = new ImageIcon("src/main/resources/DadoRojo100.png");
-    private final ImageIcon D_VERDE = new ImageIcon("src/main/resources/DadoVerde100.png");
+    private final ImageIcon D_AZUL = new ImageIcon("src/main/resources/DadoAzul1.png");
+    private final ImageIcon D_NARANJA = new ImageIcon("src/main/resources/DadoNaranja1.png");
+    private final ImageIcon D_ROJO = new ImageIcon("src/main/resources/DadoRojo1.png");
+    private final ImageIcon D_VERDE = new ImageIcon("src/main/resources/DadoVerde1.png");
 
     //Instancia variables
     private JButton botonDado = new JButton();
 
     //Constructor por defecto de la clase
-    public PanelDado() {
+    public PanelDado(int color) {
         //Define las variables de botonDado
-        this.botonDado.setIcon(D_BLANCO);
+        cambiaColor(color);
         this.botonDado.setBorder(BorderFactory.createEmptyBorder());
         this.botonDado.setContentAreaFilled(false);
         this.botonDado.setFocusable(false);
@@ -47,8 +46,8 @@ public class PanelDado extends JPanel {
         return botonDado;
     }
     
-    public void cambiaColor(int jugador) {
-        switch (jugador) {
+    public void cambiaColor(int color) {
+        switch (color) {
             case 0:
                 this.botonDado.setIcon(D_AZUL);
                 break;
@@ -61,8 +60,6 @@ public class PanelDado extends JPanel {
             case 3:
                 this.botonDado.setIcon(D_VERDE);
                 break;
-            default:
-                this.botonDado.setIcon(D_BLANCO);
         }
     }
 }
