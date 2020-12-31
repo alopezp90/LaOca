@@ -62,11 +62,9 @@ public class VentanaGanador extends JFrame {
         rotuloPanel.add(rotuloLabel);
         fondo.add(rotuloPanel);
         this.add(fondo);
-    }
-    
-    public static void main(String[] args) {
-        VentanaGanador frame = new VentanaGanador(1);
-        frame.pack();
-        frame.setVisible(true);
+        
+        //Empaqueta y hace visibre el frame
+        this.pack();
+        this.setVisible(true);
     }
 }
