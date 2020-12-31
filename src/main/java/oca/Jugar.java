@@ -8,6 +8,8 @@ package oca;
  */
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import oca.gui.PanelFicha;
+import oca.gui.VentanaGanador;
 import oca.gui.VentanaPrincipal;
 
 public class Jugar {
@@ -17,11 +19,13 @@ public class Jugar {
 
     //Inicializa variables
     private static Tablero tablero = new Tablero();
+    private static int turno = 0;
 
     //Instacia variables
     private static int numJugador;
     private static Jugador[] jugador;
     private static VentanaPrincipal ventanaPrincipal;
+    private static VentanaGanador ventanaGanador;
 
     public static void main(String[] args) {
 
@@ -30,12 +34,10 @@ public class Jugar {
 
         for (int i = 0; i < jugador.length; i++) {
             jugador[i] = new Jugador(solicitaNombre(i));
-            System.out.println(jugador[i].getNombre());
+            jugador[i].setNumero(i);
         }
-        
+
         ventanaPrincipal = new VentanaPrincipal();
-        ventanaPrincipal.pack();
-        ventanaPrincipal.setVisible(true);
     }
 
     /**
@@ -65,17 +67,18 @@ public class Jugar {
             }
         } while (numJugador != 2 && numJugador != 3 && numJugador != 4);
     }
-    
+
     /**
      * Metodo que solicita el nombre de los jugadores.
-     * 
+     *
+     * @param i numero del jugador
      * @return String con nombre del jugador.
      */
     public static String solicitaNombre(int i) {
         String texto = null;
         do {
             Object objeto = JOptionPane.showInputDialog(null,
-                    "Introduce el nombre del jugador " + (i + 1),
+                    "Introduce nombre:",
                     "Jugador " + (i + 1),
                     JOptionPane.OK_OPTION,
                     ICONO,
@@ -86,5 +89,76 @@ public class Jugar {
             }
         } while (texto == null);
         return texto;
+    }
+
+    /**
+     * Metodo que calcula a que jugador le toca a partir del cardinal de turno.
+     *
+     * @param turno int que cuenta todos los turnos de la partida
+     * @param numJugador numero de jugadores en la partida
+     * @return int numero de jugador
+     */
+    public static int turnoJugador(int turno, int numJugador) {
+        return (int) (turno - (Math.floor(turno / 4.0) * 4));
+    }
+
+    /**
+     * Metodo que llama a los necesarios para actualizar la posicion de la ficha
+     *
+     * @param numero del jugador dueo de la ficha
+     */
+    public static void mueveFicha(int numero) {
+        PanelFicha fichaPlayer;
+        switch (numero) {
+            case 0:
+                fichaPlayer = ventanaPrincipal.getPanel0();
+                break;
+            case 1:
+                fichaPlayer = ventanaPrincipal.getPanel1();
+                break;
+            case 2:
+                fichaPlayer = ventanaPrincipal.getPanel2();
+                break;
+            default:
+                fichaPlayer = ventanaPrincipal.getPanel3();
+                break;
+        }
+        fichaPlayer.mover(numero, tablero.getCasilla(jugador[numero].getPosicion()).getPoint());
+    }
+
+    /**
+     * Metodo de clase que organiza el turno de cada jugador.
+     *
+     * @param numero numero del jugador al que le toca.
+     */
+    public static void bucleTurno(int numero) {
+
+        while (jugador[numero].getTurno() < 0) {
+            //tirada de dado + anotacion en log
+            jugador[numero].tiraDado();
+            ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[numero].textoTirada());
+
+            //mueve al jugador
+            jugador[numero].moverDado(tablero, jugador);
+
+            //mueve la casilla
+            mueveFicha(numero);
+
+            //Actualiza el estado del jugador y lo suma al log
+            ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[numero].actualizaEstado(tablero, jugador));
+
+            //mueve la casilla si fuera necesario
+            mueveFicha(numero);
+        }
+        //Comprueba si ha ganado
+        if (jugador[numero].isGanador()) {
+            ventanaPrincipal.setVisible(false);
+            ventanaGanador = new VentanaGanador(numero);
+        }
+        
+        //Comienza el turno del siguiente jugador hasta que le toque tirar
+        jugador[numero + 1].comienza();
+        ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[numero + 1].estado(tablero));
+
     }
 }
