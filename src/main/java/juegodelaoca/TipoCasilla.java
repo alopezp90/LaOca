@@ -9,13 +9,13 @@ package juegodelaoca;
 public enum TipoCasilla {
 
     NORMAL("normal", false, false, 0, null),
-    OCA("oca", true, false, 0, "<em>¡De oca en oca y tiro porque me toca!<em>"),
-    PUENTE("puente", true, true, 0, "<em>¡De puente a puente y tiro porque me lleva la corriente!<em>"),
+    OCA("oca", true, false, 0, "<em>¡De oca en oca y tiras porque te toca!<em>"),
+    PUENTE("puente", true, true, 0, "<em>¡De puente a puente y tiras porque te lleva la corriente!<em>"),
     POSADA("posada", false, false, 1, "<em>Te quedas a dormir en la posado un turno.<em>"),
     POZO("pozo", false, false, -1, "<em>¡Oh no! Estás atrapado en el pozo hasta que te rescaten.</em>"),
     LABERINTO("laberinto", true, false, 0, "<em>Salir del laberinto te hace retroceder 12 casillas.</em>"),
     CARCEL("cárcel", false, false, 2, "<em>Vas a la cárcel y pierdes dos turnos.</em>"),
-    DADOS("dados", true, true, 0, "<em>¡De dado en dado y tiro porque me ha tocado!<em>"),
+    DADOS("dados", true, true, 0, "<em>¡De dado en dado y tiras porque te ha tocado!<em>"),
     CALAVERA("calavera", true, false, 0, "<em>¡Oh no! MUERTE. Vuelves al principio.</em>");
 
     private String nombre;
@@ -42,4 +42,51 @@ public enum TipoCasilla {
         this.tiradaExtra = tiradaExtra;
         this.penalizacion = penalizacion;
     }
+
+    /**
+     * Devuelve el nombre asociado a ese TipoCasilla
+     *
+     * @return String - nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Informa de si el TipoCasilla asigna orden de movimiento posterior
+     *
+     * @return true - si ordena moverse al jugador
+     */
+    public boolean isOrdenaMovimiento() {
+        return ordenaMovimiento;
+    }
+
+    /**
+     * Informa de si el TipoCasilla da tirada extra posteriormente
+     *
+     * @return true - si permite tirar otra vez.
+     */
+    public boolean isTiradaExtra() {
+        return tiradaExtra;
+    }
+
+    /**
+     * Devuelve los turnos de penalizacion asociado al TipoCasilla.
+     *
+     * @return int - turnos de penalizacion despues de este. -1 indica
+     * penalizacion permanente hasta que se cumplan otras condiciones
+     */
+    public int getPenalizacion() {
+        return penalizacion;
+    }
+
+    /**
+     * Devuelve la cadena con el texto asociado al TipoCasilla.
+     * 
+     * @return String - texto 
+     */
+    public String getTexto() {
+        return texto;
+    }
+
 }
