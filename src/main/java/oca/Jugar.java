@@ -19,7 +19,8 @@ public class Jugar {
 
     //Inicializa variables
     private static Tablero tablero = new Tablero();
-    private static int turno = 0;
+    private static int turno = -1;
+    private static boolean ganador = false;
 
     //Instacia variables
     private static int numJugador;
@@ -38,6 +39,11 @@ public class Jugar {
         }
 
         ventanaPrincipal = new VentanaPrincipal();
+        
+        //Inicia turno del jugador 0
+        jugador[0].comienza();
+        ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[0].estado(tablero));
+      
     }
 
     /**
@@ -94,12 +100,10 @@ public class Jugar {
     /**
      * Metodo que calcula a que jugador le toca a partir del cardinal de turno.
      *
-     * @param turno int que cuenta todos los turnos de la partida
-     * @param numJugador numero de jugadores en la partida
      * @return int numero de jugador
      */
-    public static int turnoJugador(int turno, int numJugador) {
-        return (int) (turno - (Math.floor(turno / 4.0) * 4));
+    public static int turnoJugador() {
+        return (int) (turno - (Math.floor(turno / (double) numJugador) * numJugador));
     }
 
     /**
@@ -133,7 +137,7 @@ public class Jugar {
      */
     public static void bucleTurno(int numero) {
 
-        while (jugador[numero].getTurno() < 0) {
+        while (jugador[numero].getTurno() > 0) {
             //tirada de dado + anotacion en log
             jugador[numero].tiraDado();
             ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[numero].textoTirada());
@@ -152,13 +156,35 @@ public class Jugar {
         }
         //Comprueba si ha ganado
         if (jugador[numero].isGanador()) {
+            ganador = true;
             ventanaPrincipal.setVisible(false);
             ventanaGanador = new VentanaGanador(numero);
         }
         
         //Comienza el turno del siguiente jugador hasta que le toque tirar
-        jugador[numero + 1].comienza();
-        ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[numero + 1].estado(tablero));
+        int siguiente;
+        if (numero == jugador.length - 1) {
+            siguiente = 0;
+        } else {
+            siguiente = numero + 1;
+        }
+        jugador[siguiente].comienza();
+        ventanaPrincipal.getPanelLog().getLog().nuevaLinea(jugador[siguiente].estado(tablero));
 
     }
+
+    public static int getTurno() {
+        return turno;
+    }
+
+    public static boolean isGanador() {
+        return ganador;
+    }
+
+    public static void setTurno(int turno) {
+        Jugar.turno = turno;
+    }
+    
+    
+    
 }
