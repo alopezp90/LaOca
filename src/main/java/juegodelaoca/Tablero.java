@@ -1,4 +1,4 @@
-package oca;
+package juegodelaoca;
 
 /**
  * Esta clase define el array de casillas que forma el tablero de La Oca.
@@ -23,20 +23,7 @@ public class Tablero {
         this.tablero = new Casilla[64];
         generaCasillas();
         generaPosiciones();
-
-        //Da movimientoOrden a las casillas oca, puente y dados
-        switch (tablero[i].getNombre()) {
-            case "oca":
-                tablero[i].setMovimientoOrden(nextOca(i));
-                break;
-            case "puente":
-                tablero[i].setMovimientoOrden(nextPosada(i));
-                break;
-            case "dados":
-                tablero[i].setMovimientoOrden(nextDados(i));
-                break;
-
-        }
+        calculaOrdenesMovimiento();
     }
 
     private void generaPosiciones() {
@@ -53,11 +40,12 @@ public class Tablero {
 
             //Da los valores buscados a tablero
             tablero[i].setNumero(i);
-            tablero[i].setPoint(new Point(x, y));
+            tablero[i].setPosicionRelativa(new Point(x, y));
         }
     }
 
     private void generaCasillas() {
+        tablero[0] = new Casilla("salida");
         //Recorre el array creando la tablero adecuada en cada posicion
         for (int i = 0; i < 64; i++) {
             switch (i) {
@@ -109,8 +97,21 @@ public class Tablero {
         }
     }
 
-    public Casilla getCasilla(int i) {
-        return tablero[i];
+    private void calculaOrdenesMovimiento() {
+        for (int i = 1; i < 64; i++) {
+            //Da movimientoOrden a las casillas oca, puente y dados
+            switch (tablero[i].getNombre()) {
+                case "oca":
+                    tablero[i].setMovimientoOrden(nextOca(i));
+                    break;
+                case "puente":
+                    tablero[i].setMovimientoOrden(nextPosada(i));
+                    break;
+                case "dados":
+                    tablero[i].setMovimientoOrden(nextDados(i));
+                    break;
+            }
+        }
     }
 
     /**
@@ -179,4 +180,10 @@ public class Tablero {
         }
         return 0;   //nunca deberia ejecutar est linea
     }
+    
+    
+    public Casilla getCasilla(int i) {
+        return tablero[i];
+    }
+
 }

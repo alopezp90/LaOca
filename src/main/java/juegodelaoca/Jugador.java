@@ -16,32 +16,13 @@ public class Jugador {
     private int ultimaPosicion;
     private int tirada;
 
-    private static int contador = 0;
-
     /**
      * Constructor de Jugador. Inicializa a 0 todas las variables.
      *
-     * @param nombre - nombre del Jugador, si esta en blanco se le asigna uno
-     * del tipo: "Jugador X"
+     * @param nombre String
      */
     public Jugador(String nombre) {
-        contador++;
-        this.nombre = compruebaNombre(nombre);
-    }
-
-    //Metodo auxiliar del constructor
-    /**
-     * Comprueba si nombre esta vacio y devuelve el nombre del Jugador.
-     *
-     * @param nombre - String introducido por el usuario
-     * @return String nombre corregido en caso de estar vacio
-     */
-    private static String compruebaNombre(String nombre) {
-        if (!nombre.equals("")) {
-            return nombre;
-        } else {
-            return "Jugador " + contador;
-        }
+        this.nombre = nombre;
     }
 
     //**************************************************
@@ -101,7 +82,7 @@ public class Jugador {
      * @param nombre String
      */
     public void setNombre(String nombre) {
-        this.nombre = compruebaNombre(nombre);
+        this.nombre = nombre;
     }
 
     /**
@@ -134,25 +115,11 @@ public class Jugador {
         Random rd = new Random();
         this.tirada = rd.nextInt(6) + 1;
     }
-
-    //**************************************************
-    //Metodos de clase
-    //**************************************************
+    
     /**
-     * Devuelve el valor del contador de instancias.
-     *
-     * @return int - contador de instancias
+     * Quita un turno de penalizacion al Jugador.
      */
-    public static int getContador() {
-        return contador;
+    public void reducePenalizacion() {
+        this.penalizacion--;
     }
-
-    /**
-     * Reinicia el contador de instancias.
-     *
-     */
-    public static void resetContador() {
-        Jugador.contador = 0;
-    }
-
 }
