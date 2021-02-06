@@ -16,7 +16,7 @@ public class VentanaGanador extends JFrame {
 
     //Declara constantes
     private final ImageIcon FONDO = new ImageIcon("src/main/resources/FondoAragon.png");
-    private final String rutaRotulo = "src/main/resources/rotuloX.png";
+    private final String RUTA_ROTULO = "src/main/resources/rotuloX.png";
     private final int ANCHO = 656, ALTO = 370;
     private final int ANCHO_ROTULO = 504, ALTO_ROTULO = 73;
     private final String titulo = "La Oca";
@@ -48,7 +48,7 @@ public class VentanaGanador extends JFrame {
         fondo.setLayout(null);
 
         //Define cual sera el rotulo
-        rotulo = new ImageIcon(rutaRotulo.replaceAll("X", "" + i));
+        rotulo = new ImageIcon(RUTA_ROTULO.replaceAll("X", "" + i));
 
         //Configura la imagen del rotulo
         rotuloLabel.setIcon(rotulo);
