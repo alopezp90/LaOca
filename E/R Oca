@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-17T20:12:45.547Z" agent="5.0 (X11)" etag="G9P3_mM8LPE9n48NALoq" version="14.3.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-02-17T20:14:42.064Z" agent="5.0 (X11)" etag="lJ-6AA7YQT6n-34-jO6d" version="14.3.0" type="github">
   <diagram id="Y1vYebfMnrsEpyhzYNS8" name="Page-1">
     <mxGraphModel dx="1125" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" math="0" shadow="0">
       <root>
@@ -25,7 +25,7 @@
         <mxCell id="qLivSBAzutCQnMS9elv--18" value="Turn" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
           <mxGeometry x="560" y="60" width="160" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="qLivSBAzutCQnMS9elv--19" value="PK     turn_id&#xa;FK     match_id&#xa;FK     participant_id&#xa;FK     move_type_id&#xa;          move_order&#xa;          dice_roll&#xa;          from_position&#xa;FK     from_tile_type_id&#xa;          to_positionFK&#xa;          to_tile_type_id&#xa;          pre_penalty&#xa;          post_penalty&#xa;&#xa;&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="qLivSBAzutCQnMS9elv--18">
+        <mxCell id="qLivSBAzutCQnMS9elv--19" value="PK     turn_id&#xa;FK     match_id&#xa;FK     participant_id&#xa;FK     move_type_id&#xa;          move_order&#xa;          dice_roll&#xa;          from_position&#xa;FK     from_tile_type_id&#xa;          to_position&#xa;FK     to_tile_type_id&#xa;          pre_penalty&#xa;          post_penalty&#xa;&#xa;&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="qLivSBAzutCQnMS9elv--18">
           <mxGeometry y="30" width="160" height="180" as="geometry" />
         </mxCell>
         <mxCell id="qLivSBAzutCQnMS9elv--22" value="Tile_type" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
