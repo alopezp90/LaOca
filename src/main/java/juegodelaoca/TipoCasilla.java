@@ -10,13 +10,14 @@ public enum TipoCasilla {
 
     NORMAL("normal", false, false, 0, null),
     OCA("oca", true, false, 0, "<em>¡De oca en oca y tiras porque te toca!<em>"),
-    PUENTE("puente", true, true, 0, "<em>¡De puente a puente y tiras porque te lleva la corriente!<em>"),
+    PUENTE("puente", true, false, 0, "<em>¡De puente a puente y tiras porque te lleva la corriente!(O NO)<em>"),
     POSADA("posada", false, false, 1, "<em>Te quedas a dormir en la posado un turno.<em>"),
     POZO("pozo", false, false, -1, "<em>¡Oh no! Estás atrapado en el pozo hasta que te rescaten.</em>"),
     LABERINTO("laberinto", true, false, 0, "<em>Salir del laberinto te hace retroceder 12 casillas.</em>"),
     CARCEL("cárcel", false, false, 2, "<em>Vas a la cárcel y pierdes dos turnos.</em>"),
-    DADOS("dados", true, true, 0, "<em>¡De dado en dado y tiras porque te ha tocado!<em>"),
-    CALAVERA("calavera", true, false, 0, "<em>¡Oh no! MUERTE. Vuelves al principio.</em>");
+    DADOS("dados", true, false, 0, "<em>¡De dado en dado y tiras porque te ha tocado!(O NO)<em>"),
+    CALAVERA("calavera", true, false, 0, "<em>¡Oh no! MUERTE. Vuelves al principio.</em>"),
+    JARDIN("jardin", false, false, 0, null);
 
     private String nombre;
     private boolean ordenaMovimiento;
@@ -41,6 +42,7 @@ public enum TipoCasilla {
         this.ordenaMovimiento = ordenaMovimiento;
         this.tiradaExtra = tiradaExtra;
         this.penalizacion = penalizacion;
+        this.texto = texto;
     }
 
     /**
@@ -88,5 +90,4 @@ public enum TipoCasilla {
     public String getTexto() {
         return texto;
     }
-
 }

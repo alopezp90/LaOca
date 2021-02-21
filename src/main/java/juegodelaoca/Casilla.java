@@ -8,116 +8,126 @@ package juegodelaoca;
  * <https://github.com/alopezp90>
  */
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Casilla {
 
     //Instancia variables de Casilla
-    private String nombre;          //Nombre del tipo de casilla
-    private int movimientoOrden;    //Movimiento al que fuerza al jugador la casilla
-    private int turnosPenalizacion; //Numero de turnos sin lanzar dados por el jugador que cae en la casilla
-    private boolean tiradaExtra;    //True si la casilla permite volver a tirar tras caer en ella
-    private int numero;             //Numero de la casilla
-    private Point posicionRelativa; //Punto de la esquina superior izquierda de la casilla en la GUI.
-
-    /**
-     * Constructor por defecto de Casilla. No necesita parametros, genera una
-     * casilla con:
-     * <ul>
-     * <li>nombre en blanco.</li>
-     * <li>movimientoOrden cero.</li>
-     * <li>turnosPenalizacion cero.</li>
-     * <li>tiradaExtra false.</li>
-     * <li>numero cero.</li>
-     * <li>posicionRelativa null.</li>
-     * </ul>
-     */
-    public Casilla() {
-        this.nombre = "normal";
-    }
+    private TipoCasilla tipoCasilla;
+    private int movimientoOrden;                //Movimiento al que fuerza al jugador la casilla
+    private int numero;                         //Numero de la casilla
+    private ArrayList<Jugador> listaJugadores;  //Cantidad de jugadores en la casilla
+    private Point posicionRelativa;             //Punto de la esquina superior izquierda de la casilla en la GUI.
 
     /**
      * Constructor parametrizado de Casilla.
      *
-     * @param nombre Tipo de casilla, puede ser:
-     * <ul>
-     * <li>"oca" ordenan movimiento hasta la siguiente del mismo tipo y dan
-     * tirada extra.</li>
-     * <li>"puente" ordena avanzar hasta la posada, pierdes 1 turno.</li>
-     * <li>"posada" pierdes 1 turno.</li>
-     * <li>"pozo" asigna -1 turnos de penalizacion, solo se resuelve si otro
-     * jugador cruza la casilla.</li>
-     * <li>"laberinto" hace retroceder 12 casillas</li>
-     * <li>"carcel" pierdes 2 turnos.</li>
-     * <li>"dados" avanza tantas casillas como la numero del dado.</li>
-     * <li>"calavera" retrocede hasta la casilla 1.</li>
-     * </ul>
+     * @param tipoCasilla TipoCasilla
      */
-    public Casilla(String nombre) {
-        this.nombre = nombre;
-
-        switch (nombre) {
-            case "oca":
-                this.tiradaExtra = true;
-                break;
-            case "puente":
-                this.turnosPenalizacion = 1;
-                break;
-            case "posada":
-                this.turnosPenalizacion = 1;
-                break;
-            case "pozo":
-                this.turnosPenalizacion = -1;
-                break;
-            case "laberinto":
-                this.movimientoOrden = -12;
-                break;
-            case "carcel":
-                this.turnosPenalizacion = 2;
-                break;
-            case "dados":
-                this.tiradaExtra = true;
-                break;
-            case "calavera":
-                this.movimientoOrden = -57;
-                break;
-        }
+    public Casilla(TipoCasilla tipoCasilla) {
+        this.listaJugadores = new ArrayList<>();
+        this.tipoCasilla = tipoCasilla;
     }
 
-    //Metodos setter
-    public void setMovimientoOrden(int movimientoOrden) {
-        this.movimientoOrden = movimientoOrden;
+    //**************************************************
+    //Getters
+    //**************************************************
+    /**
+     * Devuelve el tipo de la Casilla.
+     * 
+     * @return TipoCasilla - tipoCasilla 
+     */
+    public TipoCasilla getTipoCasilla() {
+        return tipoCasilla;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public void setPosicionRelativa(Point posicionRelativa) {
-        this.posicionRelativa = posicionRelativa;
-    }
-
-    //Metodos getter
-    public String getNombre() {
-        return nombre;
-    }
-
+    /**
+     * Devuelve el movimiento ordenado por la Casilla.
+     *
+     * @return int - movimientoOrden
+     */
     public int getMovimientoOrden() {
         return movimientoOrden;
     }
 
-    public int getTurnosPenalizacion() {
-        return turnosPenalizacion;
-    }
-
-    public boolean isTiradaExtra() {
-        return tiradaExtra;
-    }
-
+    /**
+     * Devuelve el numero de la posicion de la Casilla en el tablero.
+     *
+     * @return int - numero
+     */
     public int getNumero() {
         return numero;
     }
 
+    /**
+     * Devuelve la lista de jugadores actualmente en la Casilla.
+     *
+     * @return ArrayList - listaJugadores
+     */
+    public ArrayList getListaJugadores() {
+        return listaJugadores;
+    }
+
+    /**
+     * Devuelve las coordenadas de la esquina superior izquierda de la Casilla.
+     *
+     * @return Point - posicionRelativa
+     */
     public Point getPosicionRelativa() {
         return posicionRelativa;
     }
+
+    //**************************************************
+    //Setters
+    //**************************************************
+    /**
+     * Modifica el movimiento ordenado por la Casilla.
+     *
+     * @param movimientoOrden int
+     */
+    public void setMovimientoOrden(int movimientoOrden) {
+        this.movimientoOrden = movimientoOrden;
+    }
+
+    /**
+     * Modifica el numero de orden de la Casilla en el tablero.
+     *
+     * @param numero int
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    /**
+     * Modificas coordenadas de la esquina superior izquierda de la Casilla.
+     *
+     * @param posicionRelativa Point
+     */
+    public void setPosicionRelativa(Point posicionRelativa) {
+        this.posicionRelativa = posicionRelativa;
+    }
+
+    //**************************************************
+    //Metodos
+    //**************************************************
+    /**
+     * Pone al Jugador parametro de la lista de jugadores que se encuentran en
+     * la Casilla.
+     *
+     * @param jugador
+     */
+    public void llega(Jugador jugador) {
+        this.listaJugadores.add(jugador);
+    }
+
+    /**
+     * Quita al Jugador parametro de la lista de jugadores que se encuentran en
+     * la Casilla.
+     *
+     * @param jugador
+     */
+    public void sale(Jugador jugador) {
+        this.listaJugadores.remove(jugador);
+    }
+
 }
