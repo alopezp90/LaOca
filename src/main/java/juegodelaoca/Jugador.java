@@ -1,7 +1,6 @@
 package juegodelaoca;
 
 import java.util.Random;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -12,6 +11,7 @@ import javax.swing.ImageIcon;
  */
 public class Jugador {
 
+    //declaracion de variables
     private String nombre;
     private int numeroJugador;
     private int posicion;
@@ -21,6 +21,7 @@ public class Jugador {
     private PanelFicha ficha;
     private ImageIcon iconoDado;
 
+    //constantes
     private final ImageIcon D_AZUL = new ImageIcon("src/main/resources/DadoAzul1.png");
     private final ImageIcon D_NARANJA = new ImageIcon("src/main/resources/DadoNaranja1.png");
     private final ImageIcon D_ROJO = new ImageIcon("src/main/resources/DadoRojo1.png");

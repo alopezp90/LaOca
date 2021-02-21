@@ -13,6 +13,7 @@ public class Tablero {
 
     //Instancia variables
     private Casilla[] tablero;
+    private PanelTablero panelTablero;
     
     //Almacena la posicion del Pozo para que pueda ser leida por otras clases
     public static final int POS_POZO = 31;
@@ -22,6 +23,7 @@ public class Tablero {
      * Casilla adecuado en cada posicion.
      */
     public Tablero() {
+        this.panelTablero = new PanelTablero();
         this.tablero = new Casilla[64];
         generaCasillas();
         generaPosiciones();
@@ -195,6 +197,16 @@ public class Tablero {
 //        }
 //        return 0;   //nunca deberia ejecutar est linea
 //    }
+    
+    /**
+     * Devuelve el PanelTablero en el que se encontraran las fichas.
+     * 
+     * @return PanelTablero - panelTablero 
+     */
+    public PanelTablero getPanelTablero() {
+        return panelTablero;
+    }
+
     /**
      * Devuelve la Casilla que ocupa una posicion del Tablero.
      *
