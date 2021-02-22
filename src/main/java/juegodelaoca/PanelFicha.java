@@ -44,11 +44,29 @@ public class PanelFicha extends JPanel {
         this.setBounds(-99, 596, ANCHO_FICHA, ALTO_FICHA + 5);
         this.setOpaque(false);
         this.setLayout(new FlowLayout());
-        
+
         //Añade la ficha al JPanel
         this.add(ficha);
-        
+
         //Inicializa la ficha no visible
         this.setVisible(false);
+    }
+
+    public void mover(Point posicionFinal) {
+        Point vectorMovimiento = new Point(
+                (posicionFinal.x - this.getLocation().x) / 25,
+                (posicionFinal.y - this.getLocation().y) / 25
+        );
+        for (int i = 0; i < 25; i++) {
+            this.setLocation(new Point(this.getLocation().x + vectorMovimiento.x,
+                    this.getLocation().y + vectorMovimiento.y)
+            );
+            try {
+                Thread.sleep(40); //OJO terreno pantanoso aqui
+            } catch (InterruptedException e){
+                System.out.println(e);
+            }
+            
+        }
     }
 }

@@ -195,27 +195,4 @@ public class Jugador {
     public void reducePenalizacion() {
         this.penalizacion--;
     }
-
-    /**
-     * Mueve al Jugador por el Tablero la cantidad de casillas indicada.
-     * Devuelve true si el jugador ha pasado por el pozo y por lo tanto rescata
-     * a los que hubiera ahi.
-     *
-     * @param cantidad
-     * @return true is el jugador pasa la casilla Pozo
-     */
-    public boolean mover(int cantidad) {
-        return false;
-    }
-
-    /**
-     * Metodo auxiliar de mover().
-     * Devuelve true si el Jugador pasa o cae en la Casilla 31 (Pozo)
-     * @param inicioMovimiento
-     * @param finalMovimiento
-     * @return true si el Jugador pasa la casilla Pozo
-     */
-    private boolean pasaPozo(int inicioMovimiento, int finalMovimiento) {
-        return (inicioMovimiento < Tablero.POS_POZO && finalMovimiento >= Tablero.POS_POZO);
-    }
 }
