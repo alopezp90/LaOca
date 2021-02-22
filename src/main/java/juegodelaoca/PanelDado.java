@@ -1,4 +1,4 @@
-package oca.gui;
+package juegodelaoca;
 
 /**
  * @author Alberto López Puertas
@@ -21,11 +21,12 @@ public class PanelDado extends JPanel {
     private final ImageIcon D_VERDE = new ImageIcon("src/main/resources/DadoVerde1.png");
 
     //Instancia variables
-    private JButton botonDado = new JButton();
+    private JButton botonDado;
 
     //Constructor por defecto de la clase
     public PanelDado(int color) {
         //Define las variables de botonDado
+        botonDado = new JButton();
         cambiaColor(color);
         this.botonDado.setBorder(BorderFactory.createEmptyBorder());
         this.botonDado.setContentAreaFilled(false);

@@ -48,8 +48,8 @@ public class PanelFicha extends JPanel {
         //Añade la ficha al JPanel
         this.add(ficha);
 
-        //Inicializa la ficha no visible
-        this.setVisible(false);
+        //Inicializa la ficha no visible (PROBANDO VISIBLE TRUE)
+        this.setVisible(true);
     }
 
     public void mover(Point posicionFinal) {
@@ -66,7 +66,6 @@ public class PanelFicha extends JPanel {
             } catch (InterruptedException e){
                 System.out.println(e);
             }
-            
         }
     }
 }

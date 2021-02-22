@@ -1,4 +1,4 @@
-package oca.gui;
+package juegodelaoca;
 
 /**
  * Esta clase define la ventana que da la enhorabuena al ganador del juego.

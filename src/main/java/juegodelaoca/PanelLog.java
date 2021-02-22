@@ -1,4 +1,4 @@
-package oca.gui;
+package juegodelaoca;
 
 /**
  * @author Alberto López Puertas
